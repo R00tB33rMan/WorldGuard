@@ -523,6 +523,18 @@ public class WorldGuardBlockListener extends AbstractListener {
         }
     }
 
+    if (Materials.isUnwaxedCopper(event.getBlock().getType())) {
+        if (wcfg.disableCopperBlockFade) {
+            event.setCancelled(true);
+            return;
+        }
+        if (wcfg.useRegions && !StateFlag.test(WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery()
+                .queryState(BukkitAdapter.adapt(event.getBlock().getLocation()), (RegionAssociable) null, Flags.COPPER_FADE))) {
+            event.setCancelled(true);
+            return;
+        }
+    }
+
     /*
      * Called when a block spreads based on world conditions.
      */
@@ -694,16 +706,6 @@ public class WorldGuardBlockListener extends AbstractListener {
             }
             if (wcfg.useRegions && !StateFlag.test(WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery()
                     .queryState(BukkitAdapter.adapt(event.getBlock().getLocation()), (RegionAssociable) null, Flags.CORAL_FADE))) {
-                event.setCancelled(true);
-                return;
-            }
-        } else if (Materials.isUnwaxedCopper(event.getBlock().getType())) {
-            if (wcfg.disableCopperBlockFade) {
-                event.setCancelled(true);
-                return;
-            }
-            if (wcfg.useRegions && !StateFlag.test(WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery()
-                    .queryState(BukkitAdapter.adapt(event.getBlock().getLocation()), (RegionAssociable) null, Flags.COPPER_FADE))) {
                 event.setCancelled(true);
                 return;
             }
