@@ -53,6 +53,7 @@ public final class Materials {
     private static final Set<PotionEffectType> DAMAGE_EFFECTS = new HashSet<>();
 
     private static void putMaterialTag(Tag<Material> tag, Integer value) {
+        if (tag == null) return;
         tag.getValues().forEach(mat -> MATERIAL_FLAGS.put(mat, value));
     }
     private static Tag<Material> SIGNS_TAG = Tag.SIGNS;
