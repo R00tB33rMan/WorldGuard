@@ -520,7 +520,6 @@ public class WorldGuardBlockListener extends AbstractListener {
                 return;
             }
         }
-    }
 
         if (Materials.isUnwaxedCopper(event.getBlock().getType())) {
             if (wcfg.disableCopperBlockFade) {
